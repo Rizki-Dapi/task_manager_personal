@@ -1,0 +1,23 @@
+$kind: http-request
+name: Update Project
+method: PUT
+url: '{{base_url}}/api/project/update/:project'
+order: 5000
+auth:
+  type: noauth
+headers:
+  - key: Authorization
+    value: 'Bearer {{token}}'
+  - key: Accept
+    value: application/json
+pathVariables:
+  - key: project
+    value: '1'
+    description: Project ID
+body:
+  type: json
+  content: |-
+    {
+      "name": "Updated Project Name",
+      "status": "in-progress"
+    }

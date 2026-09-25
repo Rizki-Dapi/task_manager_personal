@@ -1,0 +1,10 @@
+name: Task Manager - Local
+values:
+  - key: base_url
+    value: 'http://localhost:8000'
+    enabled: true
+    type: default
+  - key: token
+    value: ''
+    enabled: true
+    type: default

@@ -1,0 +1,18 @@
+$kind: http-request
+name: Store Project
+method: POST
+url: '{{base_url}}/api/project/store'
+order: 4000
+auth:
+  type: noauth
+headers:
+  - key: Authorization
+    value: 'Bearer {{token}}'
+  - key: Accept
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "My New Project"
+    }

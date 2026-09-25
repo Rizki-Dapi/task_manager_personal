@@ -1,0 +1,24 @@
+$kind: http-request
+name: Update Task
+method: PUT
+url: '{{base_url}}/api/task/update/:task'
+order: 4000
+auth:
+  type: noauth
+headers:
+  - key: Authorization
+    value: 'Bearer {{token}}'
+  - key: Accept
+    value: application/json
+pathVariables:
+  - key: task
+    value: '1'
+    description: Task ID
+body:
+  type: json
+  content: |-
+    {
+      "title": "Updated Task Title",
+      "description": "Updated description",
+      "status": "in-progress"
+    }

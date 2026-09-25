@@ -1,0 +1,16 @@
+$kind: http-request
+name: Destroy Task
+method: DELETE
+url: '{{base_url}}/api/task/destroy/:task'
+order: 5000
+auth:
+  type: noauth
+headers:
+  - key: Authorization
+    value: 'Bearer {{token}}'
+  - key: Accept
+    value: application/json
+pathVariables:
+  - key: task
+    value: '1'
+    description: Task ID

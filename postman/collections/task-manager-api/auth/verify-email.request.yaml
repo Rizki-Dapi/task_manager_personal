@@ -1,0 +1,17 @@
+$kind: http-request
+name: Verify Email
+method: GET
+url: '{{base_url}}/api/auth/verify-email/:id/:hash'
+order: 9000
+auth:
+  type: noauth
+headers:
+  - key: Accept
+    value: application/json
+pathVariables:
+  - key: id
+    value: '1'
+    description: User ID
+  - key: hash
+    value: ''
+    description: Email verification hash (from the signed URL)

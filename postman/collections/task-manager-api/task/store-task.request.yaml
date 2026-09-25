@@ -1,0 +1,20 @@
+$kind: http-request
+name: Store Task
+method: POST
+url: '{{base_url}}/api/task/store'
+order: 3000
+auth:
+  type: noauth
+headers:
+  - key: Authorization
+    value: 'Bearer {{token}}'
+  - key: Accept
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "project_id": 1,
+      "title": "My New Task",
+      "description": "Task description here"
+    }

@@ -1,0 +1,8 @@
+$kind: collection
+name: Task Manager API
+description: 'API collection for the Task Manager Laravel application. Covers Authentication, Projects, and Tasks.'
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{token}}'

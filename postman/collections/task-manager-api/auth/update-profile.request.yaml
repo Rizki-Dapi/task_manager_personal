@@ -1,0 +1,21 @@
+$kind: http-request
+name: Update Profile
+method: PUT
+url: '{{base_url}}/api/auth/profile'
+order: 6000
+auth:
+  type: noauth
+headers:
+  - key: Authorization
+    value: 'Bearer {{token}}'
+  - key: Accept
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "John Doe Updated",
+      "phone": "+1234567890",
+      "password": "NewPassword@123",
+      "password_confirmation": "NewPassword@123"
+    }

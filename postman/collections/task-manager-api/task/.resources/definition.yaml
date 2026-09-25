@@ -1,0 +1,3 @@
+$kind: collection
+name: Task
+description: 'CRUD endpoints for managing tasks within projects. All requests require JWT authentication.'

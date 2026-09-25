@@ -1,0 +1,12 @@
+$kind: http-request
+name: Delete Account
+method: DELETE
+url: '{{base_url}}/api/auth/account'
+order: 7000
+auth:
+  type: noauth
+headers:
+  - key: Authorization
+    value: 'Bearer {{token}}'
+  - key: Accept
+    value: application/json

@@ -1,0 +1,19 @@
+$kind: http-request
+name: List Projects with Filter
+method: GET
+url: '{{base_url}}/api/project/list-filter'
+order: 2000
+auth:
+  type: noauth
+headers:
+  - key: Authorization
+    value: 'Bearer {{token}}'
+  - key: Accept
+    value: application/json
+queryParams:
+  - key: name
+    value: ''
+    description: Filter by project name
+  - key: per_page
+    value: '10'
+    description: Number of results per page
