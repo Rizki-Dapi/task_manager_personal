@@ -114,6 +114,9 @@ run-seeder:
 test-r:
 	php artisan test
 
+test-r-f:
+	php artisan test --filter $(name)Test
+
 # Create a new factory. Example: make factory name=test
 factory:
 	php artisan make:factory $(name)Factory
