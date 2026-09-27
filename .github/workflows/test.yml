@@ -44,23 +44,32 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
-      - name: Generate application keys for testing
+      - name: Prepare Laravel test environment
         run: |
-          php artisan key:generate --env=example --force
-          php artisan jwt:secret --env=example --force
+          cp .env.example .env
+          php artisan key:generate --force
+          php artisan jwt:secret --force
+          grep '^APP_KEY=' .env >> "$GITHUB_ENV"
+          grep '^JWT_SECRET=' .env >> "$GITHUB_ENV"
 
       - name: Prepare test database
         env:
+          APP_ENV: testing
+          DB_CONNECTION: pgsql
           DB_HOST: 127.0.0.1
+          DB_PORT: 5432
           DB_USERNAME: postgres
           DB_PASSWORD: postgres
           DB_DATABASE: task_manager_test
           MONGODB_URI: mongodb://127.0.0.1:27017
-        run: php artisan migrate --force --env=example
+        run: php artisan migrate --force
 
       - name: Run test suite
         env:
+          APP_ENV: testing
+          DB_CONNECTION: pgsql
           DB_HOST: 127.0.0.1
+          DB_PORT: 5432
           DB_USERNAME: postgres
           DB_PASSWORD: postgres
           DB_DATABASE: task_manager_test
