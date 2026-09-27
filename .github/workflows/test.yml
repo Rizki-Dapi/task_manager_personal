@@ -46,11 +46,11 @@ jobs:
 
       - name: Generate application keys for testing
         run: |
-          php artisan key:generate --env=testing --force
-          php artisan jwt:secret --env=testing --force
+          php artisan key:generate --env=example --force
+          php artisan jwt:secret --env=example --force
 
       - name: Prepare test database
-        run: php artisan migrate --force --env=testing
+        run: php artisan migrate --force --env=example
 
       - name: Run test suite
         env:
