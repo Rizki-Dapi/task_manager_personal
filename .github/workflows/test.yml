@@ -50,6 +50,12 @@ jobs:
           php artisan jwt:secret --env=example --force
 
       - name: Prepare test database
+        env:
+          DB_HOST: 127.0.0.1
+          DB_USERNAME: postgres
+          DB_PASSWORD: postgres
+          DB_DATABASE: task_manager_test
+          MONGODB_URI: mongodb://127.0.0.1:27017
         run: php artisan migrate --force --env=example
 
       - name: Run test suite
