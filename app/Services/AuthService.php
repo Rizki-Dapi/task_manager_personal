@@ -38,7 +38,7 @@ class AuthService
     public function login(array $credentials)
     {
         if (! $token = JWTAuth::attempt($credentials)) {
-            throw new InvalidCredentialsException();
+            throw new InvalidCredentialsException;
         }
 
         $user = JWTAuth::user();
@@ -49,7 +49,7 @@ class AuthService
 
         $this->logRepository->record([
             'user_id' => $user->id,
-            'action' => 'user.login'
+            'action' => 'user.login',
         ]);
 
         return ['user' => $user, 'token' => $token];
@@ -63,7 +63,7 @@ class AuthService
 
         $this->logRepository->record([
             'user_id' => $userId,
-            'action' => 'user.logout'
+            'action' => 'user.logout',
         ]);
     }
 
@@ -84,7 +84,7 @@ class AuthService
 
         $this->logRepository->record([
             'user_id' => $user->id,
-            'action' => 'user.token_refreshed'
+            'action' => 'user.token_refreshed',
         ]);
 
         return ['user' => $user, 'token' => $newToken];
@@ -139,12 +139,12 @@ class AuthService
         );
 
         if ($status !== Password::PASSWORD_RESET) {
-            throw new InvalidResetTokenException();
+            throw new InvalidResetTokenException;
         }
 
         $this->logRepository->record([
             'action' => 'user.passsword_reset',
-            'context' => ['email' => $data['email']]
+            'context' => ['email' => $data['email']],
         ]);
     }
 
@@ -155,7 +155,7 @@ class AuthService
         $this->logRepository->record([
             'user_id' => $updated->id,
             'action' => 'user.update_data',
-            'context' => ['field' => array_keys($data)]
+            'context' => ['field' => array_keys($data)],
         ]);
 
         return $updated;
@@ -174,7 +174,7 @@ class AuthService
 
         $this->logRepository->record([
             'user_id' => $userId,
-            'action' => 'user.self_delete'
+            'action' => 'user.self_delete',
         ]);
     }
 }

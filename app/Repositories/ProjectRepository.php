@@ -27,13 +27,11 @@ class ProjectRepository implements ProjectRepositoryInterface
             ->where('user_id', $userId)
             ->when(
                 isset($filters['status']),
-                fn($query) =>
-                $query->where('status', $filters['status'])
+                fn ($query) => $query->where('status', $filters['status'])
             )
             ->when(
                 isset($filters['search']),
-                fn($query) =>
-                $query->where('name', 'ilike', '%' . $filters['search'] . '%')
+                fn ($query) => $query->where('name', 'ilike', '%'.$filters['search'].'%')
             )
             ->latest()
             ->paginate($perPage);
@@ -47,6 +45,7 @@ class ProjectRepository implements ProjectRepositoryInterface
     public function update(Project $project, array $data): Project
     {
         $project->update($data);
+
         return $project->refresh();
     }
 

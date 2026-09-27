@@ -10,7 +10,7 @@ class TaskRepository implements TaskRepositoryInterface
 {
     public function findById(int $id): ?Task
     {
-        return task::find($id);
+        return Task::find($id);
     }
 
     public function findByProjectId(int $projectId): Collection
@@ -26,6 +26,7 @@ class TaskRepository implements TaskRepositoryInterface
     public function update(Task $task, array $data): Task
     {
         $task->update($data);
+
         return $task->refresh();
     }
 

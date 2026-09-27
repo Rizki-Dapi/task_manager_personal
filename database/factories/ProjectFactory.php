@@ -17,7 +17,6 @@ class ProjectFactory extends Factory
      *
      * @return array<string, mixed>
      */
-
     protected $model = Project::class;
 
     public function definition(): array
@@ -25,7 +24,7 @@ class ProjectFactory extends Factory
         return [
             'user_id' => User::factory(),
             'name' => fake()->sentence(),
-            'status' => Status::IN_PROGRESS->value
+            'status' => Status::IN_PROGRESS->value,
         ];
     }
 }

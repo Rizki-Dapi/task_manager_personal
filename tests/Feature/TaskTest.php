@@ -3,7 +3,6 @@
 use App\Models\Project;
 use App\Models\Task;
 
-use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 
 it('cannot access without authentication', function () {
@@ -14,18 +13,18 @@ it('can get task authenticated user project list', function () {
     $user = createUser();
 
     $project = Project::factory()->create([
-        'user_id' => $user->id
+        'user_id' => $user->id,
     ]);
 
     Task::factory()->count(3)->create([
-        'project_id' => $project->id
+        'project_id' => $project->id,
     ]);
 
     actingAsApi($user)->getJson("/api/task/lists/{$project->id}")
         ->assertStatus(200)
         ->assertExactJsonStructure([
             'message',
-            'data'
+            'data',
         ]);
 });
 
@@ -33,21 +32,21 @@ it('only returns tasks by project id', function () {
     $user = createUser();
 
     $project = Project::factory()->create([
-        'user_id' => $user->id
+        'user_id' => $user->id,
     ]);
 
     $otherProject = Project::factory()->create([
-        'user_id' => $user->id
+        'user_id' => $user->id,
     ]);
 
     collect(range(1, 5))->each(function () use ($project) {
         Task::factory()->create([
-            'project_id' => $project->id
+            'project_id' => $project->id,
         ]);
     });
 
     Task::factory()->create([
-        'project_id' => $otherProject->id
+        'project_id' => $otherProject->id,
     ]);
 
     $response = actingAsApi($user)
@@ -64,11 +63,11 @@ it('cannot access owned task by another user', function () {
     $otherUser = createUser();
 
     $project = Project::factory()->create([
-        'user_id' => $user->id
+        'user_id' => $user->id,
     ]);
 
     $task = Task::factory()->create([
-        'project_id' => $project->id
+        'project_id' => $project->id,
     ]);
 
     actingAsApi($otherUser)

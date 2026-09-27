@@ -31,8 +31,8 @@ class ProjectController extends Controller
                 'current_page' => $project->currentPage(),
                 'last_page' => $project->lastPage(),
                 'per_page' => $project->perPage(),
-                'total' => $project->total()
-            ]
+                'total' => $project->total(),
+            ],
         ]), Response::HTTP_OK);
     }
 
@@ -52,8 +52,8 @@ class ProjectController extends Controller
                 'current_page' => $project->currentPage(),
                 'last_page' => $project->lastPage(),
                 'per_page' => $project->perPage(),
-                'total' => $project->total()
-            ]
+                'total' => $project->total(),
+            ],
         ]), Response::HTTP_OK);
     }
 
@@ -63,7 +63,7 @@ class ProjectController extends Controller
         $project = $this->projectService->find($id, $userId);
 
         return response()->json(ApiFormatter::createJson('Project retrieved successfully', [
-            'project' => new ProjectResource($project)
+            'project' => new ProjectResource($project),
         ]), Response::HTTP_OK);
     }
 
@@ -72,7 +72,7 @@ class ProjectController extends Controller
         $project = $this->projectService->create($req->validated(), $req->user());
 
         return response()->json(ApiFormatter::createJson('Project created successfully', [
-            'project' => new ProjectResource($project)
+            'project' => new ProjectResource($project),
         ]), Response::HTTP_CREATED);
     }
 
@@ -81,7 +81,7 @@ class ProjectController extends Controller
         $project = $this->projectService->update($project, $req->validated(), $req->user());
 
         return response()->json(ApiFormatter::createJson('Project updated successfully', [
-            'project' => new ProjectResource($project)
+            'project' => new ProjectResource($project),
         ]), Response::HTTP_OK);
     }
 

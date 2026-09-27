@@ -25,7 +25,7 @@ class UpdatedProjectRequest extends FormRequest
     {
         return [
             'name' => ['sometimes', 'string', 'max:255'],
-            'status' => ['sometimes', 'string', Rule::in(['in-progress', 'completed'])]
+            'status' => ['sometimes', 'string', Rule::in(['in-progress', 'completed'])],
         ];
     }
 }

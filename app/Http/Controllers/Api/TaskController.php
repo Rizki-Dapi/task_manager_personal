@@ -23,9 +23,10 @@ class TaskController extends Controller
         $task = $this->taskService->findByProjectId($projectId, $userId);
 
         return response()->json(ApiFormatter::createJson('Tasks retrieved successfully', [
-            'tasks' => TaskResource::collection($task)
+            'tasks' => TaskResource::collection($task),
         ]), Response::HTTP_OK);
     }
+
     //
     public function show(int $id)
     {
@@ -34,7 +35,7 @@ class TaskController extends Controller
         $task = $this->taskService->findById($id, $userId);
 
         return response()->json(ApiFormatter::createJson('Task retrieved successfully', [
-            'task' => new TaskResource($task)
+            'task' => new TaskResource($task),
         ]), Response::HTTP_OK);
     }
 
@@ -43,7 +44,7 @@ class TaskController extends Controller
         $task = $this->taskService->create($req->validated());
 
         return response()->json(ApiFormatter::createJson('Task created successfully', [
-            'task' => new TaskResource($task)
+            'task' => new TaskResource($task),
         ]), Response::HTTP_CREATED);
     }
 
@@ -52,7 +53,7 @@ class TaskController extends Controller
         $task = $this->taskService->update($task, $req->validated(), $req->user());
 
         return response()->json(ApiFormatter::createJson('Task update successfully', [
-            'task' => new TaskResource($task)
+            'task' => new TaskResource($task),
         ]), Response::HTTP_OK);
     }
 

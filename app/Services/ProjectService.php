@@ -37,7 +37,7 @@ class ProjectService
         return $project;
     }
 
-    public function listByfilter(int $userId, array $filters = [], int $perPage): LengthAwarePaginator
+    public function listByfilter(int $userId, array $filters, int $perPage): LengthAwarePaginator
     {
         return $this->projectRepository->paginateByFilters($userId, $filters, $perPage);
     }
@@ -46,12 +46,12 @@ class ProjectService
     {
         $project = $this->projectRepository->create([
             ...$data,
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
 
         $this->logRepository->record([
             'actions' => 'user.project_created',
-            'context' => ['project_id' => $project->id]
+            'context' => ['project_id' => $project->id],
         ]);
 
         return $project;
@@ -67,7 +67,7 @@ class ProjectService
 
         $this->logRepository->record([
             'action' => 'user.projectUpdate',
-            'conetxt' => ['project_id' => $project->id]
+            'conetxt' => ['project_id' => $project->id],
         ]);
 
         return $updated;
@@ -83,7 +83,7 @@ class ProjectService
 
         $this->logRepository->record([
             'action' => 'user.delete_project',
-            'context' => ['project_id' => $project->id]
+            'context' => ['project_id' => $project->id],
         ]);
     }
 }

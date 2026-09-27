@@ -26,7 +26,7 @@ class UpdatedTaskRequest extends FormRequest
         return [
             'title' => ['sometimes', 'string', 'max:255'],
             'desctiption' => ['sometimes', 'string', 'max:1000'],
-            'status' => ['sometimes', 'string', Rule::in(['in-progress', 'completed'])]
+            'status' => ['sometimes', 'string', Rule::in(['in-progress', 'completed'])],
         ];
     }
 }

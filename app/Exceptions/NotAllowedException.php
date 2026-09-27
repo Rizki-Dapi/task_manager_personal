@@ -17,7 +17,7 @@ class NotAllowedException extends Exception
     {
         return response()->json([
             'error' => 'Unprocessable Entity',
-            'message' => $this->getMessage()
+            'message' => $this->getMessage(),
         ], Response::HTTP_FORBIDDEN);
     }
 }

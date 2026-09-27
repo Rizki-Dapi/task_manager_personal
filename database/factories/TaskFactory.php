@@ -17,7 +17,6 @@ class TaskFactory extends Factory
      *
      * @return array<string, mixed>
      */
-
     protected $model = Task::class;
 
     public function definition(): array
@@ -26,7 +25,7 @@ class TaskFactory extends Factory
             'project_id' => Project::factory(),
             'title' => fake()->sentence(),
             'description' => fake()->paragraph(),
-            'status' => Status::IN_PROGRESS->value
+            'status' => Status::IN_PROGRESS->value,
         ];
     }
 }

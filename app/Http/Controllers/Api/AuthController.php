@@ -53,7 +53,7 @@ class AuthController extends Controller
         $user = $this->authService->me();
 
         return response()->json(ApiFormatter::createJson('User retrieved successfully', [
-            'user' => new UserResource($user)
+            'user' => new UserResource($user),
         ]), Response::HTTP_OK);
     }
 
@@ -73,7 +73,7 @@ class AuthController extends Controller
         $user = $this->authService->updateProfile($req->user(), $req->validated());
 
         return response()->json(ApiFormatter::createJson('Profile updated successfully.', [
-            'user' => new UserResource($user)
+            'user' => new UserResource($user),
         ]), Response::HTTP_OK);
     }
 
@@ -91,7 +91,7 @@ class AuthController extends Controller
         if (! $result['user']) {
             return response()->json([
                 'error' => 'Forbidden',
-                'message' => 'Invalid verification link'
+                'message' => 'Invalid verification link',
             ], Response::HTTP_FORBIDDEN);
         }
 

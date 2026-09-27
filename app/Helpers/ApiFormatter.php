@@ -30,6 +30,7 @@ class ApiFormatter
         foreach ($data as $key => $value) {
             if (is_array($value)) {
                 $data[$key] = self::filterSensitiveData($value);
+
                 continue;
             }
 

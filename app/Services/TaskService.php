@@ -58,7 +58,7 @@ class TaskService
 
         $this->logRepository->record([
             'action' => 'user.create_task',
-            'context' => ['task_id' => $task->id]
+            'context' => ['task_id' => $task->id],
         ]);
 
         return $task;
@@ -76,7 +76,7 @@ class TaskService
 
         $this->logRepository->record([
             'action' => 'user.update_task',
-            'context' => ['task_id' => $task->id]
+            'context' => ['task_id' => $task->id],
         ]);
 
         return $task;
@@ -96,7 +96,7 @@ class TaskService
 
         $this->logRepository->record([
             'action' => 'user.delete_task',
-            'context' => ['task_id' => $task->id]
+            'context' => ['task_id' => $task->id],
         ]);
     }
 
@@ -111,7 +111,7 @@ class TaskService
         $task = $this->taskRepository->findByProjectId($projectId);
 
         $allcompleted = $task->isNotEmpty()
-            && $task->every(fn(Task $task) => $task->status === Status::COMPLETED->value);
+            && $task->every(fn (Task $task) => $task->status === Status::COMPLETED->value);
 
         $newStatus = $allcompleted ? Status::COMPLETED->value : Status::IN_PROGRESS->value;
 
@@ -123,8 +123,8 @@ class TaskService
                 'context' => [
                     'project_id' => $project->id,
                     'from' => $project->status,
-                    'to' > $newStatus
-                ]
+                    $newStatus < 'to',
+                ],
             ]);
         }
     }

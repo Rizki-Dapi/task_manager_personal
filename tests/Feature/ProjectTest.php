@@ -12,14 +12,14 @@ it('can get project authenticated user project list', function () {
     $user = createUser();
 
     $project = Project::factory()->create([
-        'user_id' => $user->id
+        'user_id' => $user->id,
     ]);
 
     actingAsApi($user)->getJson("/api/task/lists/{$project->id}")
         ->assertStatus(200)
         ->assertExactJsonStructure([
             'message',
-            'data'
+            'data',
         ]);
 });
 
@@ -29,12 +29,12 @@ it('only returns projects owned by authenctication user', function () {
 
     collect(range(1, 3))->each(function () use ($user) {
         Project::factory()->create([
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ]);
     });
 
     Project::factory()->create([
-        'user_id' => $otherUser->id
+        'user_id' => $otherUser->id,
     ]);
 
     $response = actingAsApi($user)
@@ -55,28 +55,28 @@ it('get filter project by name', function () {
 
     Project::factory()->create([
         'user_id' => $user->id,
-        'name' => 'backend'
+        'name' => 'backend',
     ]);
 
     Project::factory()->create([
         'user_id' => $user->id,
-        'name' => 'frontend'
+        'name' => 'frontend',
     ]);
 
     actingAsApi($user)
         ->getJson('/api/project/list-filter?name=backend')
         ->assertStatus(200)
         ->assertJsonFragment([
-            'name' => 'backend'
+            'name' => 'backend',
         ]);
 });
 
 it('create a project and auto-assign an in-progress', function () {
     $user = createUser();
 
-    actingAsApi($user)->postJson("/api/project/store", [
+    actingAsApi($user)->postJson('/api/project/store', [
         'user_id' => $user->id,
-        'name' => fake()->sentence
+        'name' => fake()->sentence,
     ])->assertStatus(201);
 });
 
@@ -103,7 +103,7 @@ it('cannot access owned project by another user', function () {
     $userB = createUser();
 
     $project = Project::factory()->create([
-        'user_id' => $userA->id
+        'user_id' => $userA->id,
     ]);
 
     actingAsApi($userB)->getJson("/api/project/show/{$project->id}")
@@ -118,7 +118,7 @@ it('cannot delete owned by another userr', function () {
     $userB = createUser();
 
     $project = Project::factory()->create([
-        'user_id' => $userA->id
+        'user_id' => $userA->id,
     ]);
 
     actingAsApi($userB)
