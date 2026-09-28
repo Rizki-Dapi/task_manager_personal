@@ -44,6 +44,8 @@ class ProjectService
 
     public function create(array $data, User $user): Project
     {
+        $data['status'] ??= 'in-progress';
+
         $project = $this->projectRepository->create([
             ...$data,
             'user_id' => $user->id,

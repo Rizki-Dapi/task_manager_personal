@@ -12,8 +12,6 @@ class Task extends Model
 {
     use HasFactory;
 
-    protected $attributes = ['status' => 'in-progress'];
-
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class, 'project_id');

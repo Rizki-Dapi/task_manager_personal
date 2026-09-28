@@ -52,6 +52,8 @@ class TaskService
 
     public function create(array $data): Task
     {
+        $data['status'] ??= 'in-progress';
+
         $task = $this->taskRepository->create($data);
 
         $this->syncProjectStatus($task->project_id);
@@ -111,7 +113,7 @@ class TaskService
         $task = $this->taskRepository->findByProjectId($projectId);
 
         $allcompleted = $task->isNotEmpty()
-            && $task->every(fn (Task $task) => $task->status === Status::COMPLETED->value);
+            && $task->every(fn(Task $task) => $task->status === Status::COMPLETED->value);
 
         $newStatus = $allcompleted ? Status::COMPLETED->value : Status::IN_PROGRESS->value;
 

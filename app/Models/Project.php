@@ -13,8 +13,6 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $attributes = ['status' => 'in-progress'];
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
